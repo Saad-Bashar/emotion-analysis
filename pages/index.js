@@ -1,65 +1,175 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React, { useRef, useState } from "react";
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import {
+  Button,
+  Card,
+  Typography,
+  CardContent,
+  CardActions,
+} from "@material-ui/core";
+import Carousel, { Dots } from "@brainhubeu/react-carousel";
+import "@brainhubeu/react-carousel/lib/style.css";
+import VerticalLinearStepper from "../src/components/steppers";
 
 export default function Home() {
+  const data = [1, 2, 3];
+  const carouselRef = useRef();
+  const [index, setIndex] = useState(0);
+
+  const changeIndex = (idx) => {
+    setIndex(idx);
+  };
+
   return (
     <div className={styles.container}>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        />
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome to <a href="https://nextjs.org"> the fun experiment!</a>
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
+          Get started by reading out{" "}
+          <code className={styles.code}>this short guidelines ;)</code>
         </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
       </main>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+      <Carousel value={index} onChange={changeIndex} ref={carouselRef} arrows>
+        <div style={{ flex: 0.6 }}>
+          <Card
+            className={styles.card}
+            elevation={5}
+            style={{ borderRadius: 16 }}
+          >
+            <CardContent>
+              <Typography
+                style={{ fontWeight: "bold", textAlign: "center" }}
+                variant="h2"
+              >
+                A little bit about myself
+              </Typography>
+
+              <Typography
+                color="textSecondary"
+                style={{ marginTop: 20, fontSize: 22 }}
+              >
+                Hi! My name is Saad Bin Bashar, born in Bangladesh and currently
+                living & working in this beautiful Malaysia. I am currently
+                studying in Masters of Computer Science (Applied Computing).
+              </Typography>
+            </CardContent>
+
+            <CardActions>
+              <Button
+                onClick={() => {
+                  setIndex(index + 1);
+                }}
+                variant="contained"
+                size="large"
+                color="primary"
+              >
+                NEXT
+              </Button>
+            </CardActions>
+          </Card>
+        </div>
+
+        <div style={{ flex: 0.6 }}>
+          <Card
+            className={styles.card}
+            elevation={5}
+            style={{ borderRadius: 16 }}
+          >
+            <CardContent>
+              <Typography
+                style={{ fontWeight: "bold", textAlign: "center" }}
+                variant="h2"
+              >
+                The purpose of this experiment
+              </Typography>
+
+              <Typography
+                color="textSecondary"
+                style={{ marginTop: 20, fontSize: 22 }}
+              >
+                <ul>
+                  <li>
+                    To collect data in order to identify programmers' specific
+                    emotions and mood.
+                  </li>
+                  <li>
+                    Your perfomance in programming depends on your emotion and
+                    mood on certain parameters. We are here to help identifying
+                    your feelings related to programming! &#128524;
+                  </li>
+                </ul>
+              </Typography>
+            </CardContent>
+
+            <CardActions>
+              <Button
+                onClick={() => {
+                  setIndex(1);
+                }}
+                variant="contained"
+                size="large"
+                color="primary"
+              >
+                NEXT
+              </Button>
+            </CardActions>
+          </Card>
+        </div>
+
+        <div style={{ flex: 0.6 }}>
+          <Card
+            className={styles.card}
+            elevation={5}
+            style={{ borderRadius: 16 }}
+          >
+            <CardContent>
+              <Typography
+                style={{ fontWeight: "bold", textAlign: "center" }}
+                variant="h2"
+              >
+                Step by step guidelines
+              </Typography>
+              <VerticalLinearStepper />
+            </CardContent>
+
+            {/* <CardActions> */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Button
+                onClick={() => {
+                  setIndex(1);
+                }}
+                variant="contained"
+                size="large"
+                color="primary"
+              >
+                I AM READY TO START!
+              </Button>
+            </div>
+
+            {/* </CardActions> */}
+          </Card>
+        </div>
+      </Carousel>
     </div>
-  )
+  );
 }
