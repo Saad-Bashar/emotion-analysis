@@ -7,18 +7,51 @@ import {
   Typography,
   CardContent,
   CardActions,
+  Modal,
 } from "@material-ui/core";
 import Carousel, { Dots } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
 import VerticalLinearStepper from "../src/components/steppers";
+import Router from "next/router";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: 16,
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 export default function Home() {
-  const data = [1, 2, 3];
   const carouselRef = useRef();
   const [index, setIndex] = useState(0);
+  const [finalStep, setFinalStep] = useState(false);
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  console.log("finalSteeps ", finalStep);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const changeIndex = (idx) => {
     setIndex(idx);
+  };
+
+  const completeSteps = () => {
+    setFinalStep(true);
   };
 
   return (
@@ -97,28 +130,34 @@ export default function Home() {
                 The purpose of this experiment
               </Typography>
 
-              <Typography
-                color="textSecondary"
-                style={{ marginTop: 20, fontSize: 22 }}
-              >
-                <ul>
-                  <li>
+              <ul>
+                <li>
+                  <Typography
+                    color="textSecondary"
+                    style={{ marginTop: 20, fontSize: 22 }}
+                  >
                     To collect data in order to identify programmers' specific
                     emotions and mood.
-                  </li>
-                  <li>
+                  </Typography>
+                </li>
+
+                <li>
+                  <Typography
+                    color="textSecondary"
+                    style={{ marginTop: 20, fontSize: 22 }}
+                  >
                     Your perfomance in programming depends on your emotion and
                     mood on certain parameters. We are here to help identifying
                     your feelings related to programming! &#128524;
-                  </li>
-                </ul>
-              </Typography>
+                  </Typography>
+                </li>
+              </ul>
             </CardContent>
 
             <CardActions>
               <Button
                 onClick={() => {
-                  setIndex(1);
+                  setIndex(index + 1);
                 }}
                 variant="contained"
                 size="large"
@@ -143,10 +182,9 @@ export default function Home() {
               >
                 Step by step guidelines
               </Typography>
-              <VerticalLinearStepper />
+              <VerticalLinearStepper completeSteps={completeSteps} />
             </CardContent>
 
-            {/* <CardActions> */}
             <div
               style={{
                 display: "flex",
@@ -156,7 +194,8 @@ export default function Home() {
             >
               <Button
                 onClick={() => {
-                  setIndex(1);
+                  if (!finalStep) return handleOpen();
+                  return Router.push("./practice");
                 }}
                 variant="contained"
                 size="large"
@@ -165,11 +204,32 @@ export default function Home() {
                 I AM READY TO START!
               </Button>
             </div>
-
-            {/* </CardActions> */}
           </Card>
         </div>
       </Carousel>
+
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+            <h1 id="transition-modal-title">Don't cheat!</h1>
+            <p id="transition-modal-description">
+              Read the step by step guidelines first! It will make your life
+              easier.
+            </p>
+          </div>
+        </Fade>
+      </Modal>
     </div>
   );
 }

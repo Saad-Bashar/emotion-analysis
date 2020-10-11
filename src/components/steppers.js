@@ -64,12 +64,16 @@ function getStepContent(step) {
   }
 }
 
-export default function VerticalLinearStepper() {
+export default function VerticalLinearStepper({ completeSteps }) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
   const handleNext = () => {
+    if (activeStep === steps.length - 1) {
+      completeSteps();
+    }
+
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
