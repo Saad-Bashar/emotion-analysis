@@ -510,7 +510,7 @@ export default function personaldetails() {
 
                     <Grid style={{ marginTop: 40 }}>
                       <Button
-                        onClick={() => handleClickOpen(isValid, submitForm)}
+                        onClick={submitForm}
                         variant="contained"
                         color="primary"
                         size="large"
