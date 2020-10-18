@@ -195,7 +195,7 @@ export default function Home() {
               <Button
                 onClick={() => {
                   if (!finalStep) return handleOpen();
-                  return Router.push("./practice");
+                  return Router.push("./personaldetails");
                 }}
                 variant="contained"
                 size="large"
