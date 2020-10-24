@@ -25,10 +25,6 @@ import Grid from "@material-ui/core/Grid";
 import * as Yup from "yup";
 import Slide from "@material-ui/core/Slide";
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -63,7 +59,7 @@ export default function personaldetails() {
   return (
     <div className={cs.container}>
       <div className={cs.main}>
-        <h1 className={cs.title}>Introduce yourself please</h1>
+        <h3 className={cs.title}>SECTION 1 - INTRODUCTION</h3>
 
         <p className={cs.description}>
           Forms are a bit painful,
@@ -115,8 +111,6 @@ export default function personaldetails() {
                   values,
                   setFieldValue,
                   errors,
-                  touched,
-                  isValid,
                 }) => (
                   <Form>
                     {isSubmitting && <LinearProgress />}
