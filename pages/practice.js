@@ -4,12 +4,14 @@ import {
   Card,
   Typography,
   CardContent,
+  TextField,
   LinearProgress,
   FormControl,
   InputLabel,
   FormControlLabel,
   MenuItem,
   Checkbox,
+  FormLabel,
   FormGroup,
   Grid,
   CardActions,
@@ -58,30 +60,119 @@ const data = [
     title: "We are done with video demo",
     subtitle: "We are almost there for the real exercise",
     instruction:
-      "We are done practicing with videos, We are almost there for the real exercise, Now we will practice exactly like real test!",
+      "We are done practicing with videos, We are almost ready for the final round. \n Before that we will practice some real questions.",
+  },
+
+  {
+    index: 5,
+    title:
+      "Carefully read the following code sample and choose the right answer.",
+    type: "question",
+    question:
+      "Which one is the correct statement to compute the area of a circle?",
+    questionType: "mcq",
+    img: '/pq1.png',
+    options: [
+      {
+        label: "radius / radius * pi",
+        value: "ans1",
+        ans: false
+      },
+      {
+        label: "radius * radius * pi",
+        value: "ans2",
+        ans: true
+      },
+      {
+        label: "radius * radius * pi * pi",
+        value: "ans3",
+        ans: false
+      },
+    ],
+  },
+
+  {
+    index: 6,
+    type: "question",
+    questionType: 'fib',
+    img: '/pq2.png',
+    title: "Read the code sample below carefully",
+    question: "What will be the output of line 6?"
+  },
+
+  {
+    index: 7,
+    title: "That's it!",
+    subtitle: "Click finish to start the real experiment",
+    instruction:
+      "That's it. Click finish to get started with the real experiment :)",
   },
 ];
 
 export default function practice() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [pq1, setPq1] = useState(null)
+  const [pq2, setPq2] = useState(null)
 
   const renderContent = (item) => {
     if (item.type === "video") {
       return (
-        <div>
+        <Grid item>
           <video style={{ width: "100%", borderRadius: 16 }} controls>
             <source src={item.video} type="video/mp4" />
           </video>
-        </div>
+        </Grid>
       );
     }
 
     if (item.type === "survey") {
       return (
-        <div>
+        <Grid item>
           <SAM />
           <NASA />
-        </div>
+        </Grid>
+      );
+    }
+
+    if (item.type === "question") {
+      return (
+        <Grid item>
+          <Typography style={{ paddingBottom: 10 }}>{item.title}</Typography>
+          <img
+            src={item.img}
+            style={{ height: "100%", width: "100%", marginBottom: 20 }}
+          />
+
+          {item.questionType === "mcq" && (
+            <FormControl component="fieldset">
+              <FormLabel component="legend">{item.question}</FormLabel>
+              <RadioGroup
+                value={pq1}
+                name="pq1"
+                onChange={(event) => {
+                  setPq1(event.target.value);
+                }}
+              >
+                {item.options.map((value, index) => {
+                  return (
+                    <FormControlLabel
+                      value={value.value}
+                      control={<Radio />}
+                      label={value.label}
+                    />
+                  );
+                })}
+              </RadioGroup>
+            </FormControl>
+          )}
+
+          {item.questionType === "fib" && (
+            <Grid item>
+              <FormLabel component="legend">{item.question}</FormLabel>
+              <TextField onChange={(event) => setPq2(event.target.value) }  />
+            </Grid>
+          )}
+        </Grid>
       );
     }
   };
@@ -118,7 +209,7 @@ export default function practice() {
           >
             <CardContent style={{ alignSelf: "center" }}>
               <Typography
-                style={{ fontWeight: "bold", marginBottom: 5 }}
+                style={{ marginBottom: 5 }}
                 variant="h6"
               >
                 {data[activeIndex].instruction}
@@ -162,7 +253,6 @@ export default function practice() {
         </Grid>
       </Grid>
       <script src="https://gist.github.com/anonymous/34791909fcab19a6b1eee7f1a9c064f7.js"></script>
-
     </div>
   );
 }
