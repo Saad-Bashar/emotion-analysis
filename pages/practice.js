@@ -71,37 +71,53 @@ const data = [
     question:
       "Which one is the correct statement to compute the area of a circle?",
     questionType: "mcq",
-    img: '/pq1.png',
+    img: "/pq1.png",
     options: [
       {
         label: "radius / radius * pi",
         value: "ans1",
-        ans: false
+        ans: false,
       },
       {
         label: "radius * radius * pi",
         value: "ans2",
-        ans: true
+        ans: true,
       },
       {
         label: "radius * radius * pi * pi",
         value: "ans3",
-        ans: false
+        ans: false,
       },
     ],
   },
 
   {
     index: 6,
-    type: "question",
-    questionType: 'fib',
-    img: '/pq2.png',
-    title: "Read the code sample below carefully",
-    question: "What will be the output of line 6?"
+    instruction:
+      "Please choose the options that best matches after watching the video",
+    type: "survey",
+    for: "pq1",
   },
 
   {
     index: 7,
+    type: "question",
+    questionType: "fib",
+    img: "/pq2.png",
+    title: "Read the code sample below carefully",
+    question: "What will be the output of line 6?",
+  },
+
+  {
+    index: 8,
+    instruction:
+      "Please choose the options that best matches after watching the video",
+    type: "survey",
+    for: "pq2",
+  },
+
+  {
+    index: 9,
     title: "That's it!",
     subtitle: "Click finish to start the real experiment",
     instruction:
@@ -111,8 +127,8 @@ const data = [
 
 export default function practice() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [pq1, setPq1] = useState(null)
-  const [pq2, setPq2] = useState(null)
+  const [pq1, setPq1] = useState(null);
+  const [pq2, setPq2] = useState(null);
 
   const renderContent = (item) => {
     if (item.type === "video") {
@@ -169,7 +185,7 @@ export default function practice() {
           {item.questionType === "fib" && (
             <Grid item>
               <FormLabel component="legend">{item.question}</FormLabel>
-              <TextField onChange={(event) => setPq2(event.target.value) }  />
+              <TextField onChange={(event) => setPq2(event.target.value)} />
             </Grid>
           )}
         </Grid>
@@ -208,10 +224,7 @@ export default function practice() {
             elevation={5}
           >
             <CardContent style={{ alignSelf: "center" }}>
-              <Typography
-                style={{ marginBottom: 5 }}
-                variant="h6"
-              >
+              <Typography style={{ marginBottom: 5 }} variant="h6">
                 {data[activeIndex].instruction}
               </Typography>
               {data[activeIndex].extraInfo ? (

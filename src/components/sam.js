@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   FormControl,
   FormControlLabel,
@@ -6,16 +6,36 @@ import {
   RadioGroup,
   Radio,
   Paper,
+  Typography,
 } from "@material-ui/core";
 
-export default function SAM({ title }) {
+export default function SAM({ title, setValue }) {
+  const [valence, setValence] = useState(null);
+  const [arousal, setArousal] = useState(null);
+
+  console.log("valence ", valence);
+
+  useEffect(() => {
+    if (valence && arousal) {
+      setValue(valence, arousal);
+    }
+  }, [valence, arousal]);
+
   return (
     <div>
+      <Typography variant="body2">
+        How was your experience solving the problem?
+      </Typography>
       <div>
         <img style={{ width: 620 }} src="/SAM.png" />
         <FormGroup style={{ alignItems: "flex-start" }}>
           <FormControl>
-            <RadioGroup style={{ flexDirection: "row" }}>
+            <RadioGroup
+              name="valence"
+              value={parseInt(valence)}
+              onChange={(event) => setValence(event.target.value)}
+              style={{ flexDirection: "row" }}
+            >
               <Paper style={{ width: 620, marginTop: 3 }}>
                 <div style={{ marginLeft: 65 }}>
                   <FormControlLabel value={1} control={<Radio />} />
@@ -70,7 +90,11 @@ export default function SAM({ title }) {
         <img style={{ width: 620 }} src="/SAM2.png" />
         <FormGroup style={{ alignItems: "flex-start" }}>
           <FormControl>
-            <RadioGroup style={{ flexDirection: "row" }}>
+            <RadioGroup
+              value={parseInt(arousal)}
+              onChange={(event) => setArousal(event.target.value)}
+              style={{ flexDirection: "row" }}
+            >
               <Paper style={{ width: 620, marginTop: 3 }}>
                 <div style={{ marginLeft: 65 }}>
                   <FormControlLabel value={1} control={<Radio />} />
