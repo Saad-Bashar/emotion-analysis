@@ -186,11 +186,11 @@ const data = [
     correctAnswer: "False",
     options: [
       {
-        value: "True"
+        value: "True",
       },
       {
-        value: "False"
-      }
+        value: "False",
+      },
     ],
     dictionary: {
       function: 1,
@@ -215,16 +215,17 @@ const data = [
   {
     index: 5,
     questionType: "trueFalse",
-    question: "All interface methods should be declared as public when implemented in a class",
+    question:
+      "All interface methods should be declared as public when implemented in a class",
     givenAns: null,
     correctAnswer: "True",
     options: [
       {
-        value: "True"
+        value: "True",
       },
       {
-        value: "False"
-      }
+        value: "False",
+      },
     ],
     dictionary: {
       function: 1,
@@ -245,11 +246,230 @@ const data = [
     },
     surveyDone: false,
   },
+
+  {
+    index: 6,
+    questionType: "mcq",
+    question:
+      "A CONTINUE statement inside a loop causes the program execution ________ the loop",
+    givenAns: null,
+    correctAnswer: "B",
+    options: [
+      {
+        label: "Skip",
+        value: "A",
+      },
+      {
+        label:
+          "Skip present iteration and continue with the next iteration of the loop",
+        value: "B",
+      },
+      {
+        label: "Exit",
+        value: "C",
+      },
+      {
+        label: "None",
+        value: "D",
+      },
+    ],
+    dictionary: {
+      function: 0,
+      loops: 1,
+      condition: 0,
+      theory: 0,
+      mcq: 1,
+      findingOutput: 0,
+      trueOrFalse: 0,
+      easy: 1,
+      hard: 0,
+      happyActive: 0,
+      happyInactive: 0,
+      unhappyActive: 0,
+      unhappyInactive: 0,
+      mentalEffort: 0,
+      valid: 0,
+    },
+    surveyDone: false,
+  },
+
+  {
+    index: 7,
+    questionType: "mcq",
+    question:
+      "What is the value of 'age' in the below Java program with a D0-WHILE loop?",
+    questionImage: "/loops-mcq-hard.png",
+    givenAns: null,
+    correctAnswer: "B",
+    options: [
+      {
+        label: "20",
+        value: "A",
+      },
+      {
+        label: "21",
+        value: "B",
+      },
+      {
+        label: "Compilation Error",
+        value: "C",
+      },
+      {
+        label: "None",
+        value: "D",
+      },
+    ],
+    dictionary: {
+      function: 0,
+      loops: 1,
+      condition: 0,
+      theory: 0,
+      mcq: 1,
+      findingOutput: 0,
+      trueOrFalse: 0,
+      easy: 0,
+      hard: 1,
+      happyActive: 0,
+      happyInactive: 0,
+      unhappyActive: 0,
+      unhappyInactive: 0,
+      mentalEffort: 0,
+      valid: 0,
+    },
+    surveyDone: false,
+  },
+
+
+  {
+    index: 8,
+    questionType: "output",
+    question: "What will be the output of the following program?",
+    img: "/loops-output-easy.png",
+    givenAns: null,
+    correctAnswer: "6",
+    dictionary: {
+      function: 0,
+      loops: 1,
+      condition: 0,
+      theory: 0,
+      mcq: 0,
+      findingOutput: 1,
+      trueOrFalse: 0,
+      easy: 1,
+      hard: 0,
+      happyActive: 0,
+      happyInactive: 0,
+      unhappyActive: 0,
+      unhappyInactive: 0,
+      mentalEffort: 0,
+      valid: 0,
+    },
+    surveyDone: false,
+  },
+
+  {
+    index: 9,
+    questionType: "output",
+    question: "What will be the output of the following program?",
+    hint: "Your answer should be in this format: 2712297 where i = 27, j - 12 and k is 297", 
+    img: "/loops-hard-output.png",
+    givenAns: null,
+    correctAnswer: "1616297",
+    dictionary: {
+      function: 0,
+      loops: 1,
+      condition: 0,
+      theory: 0,
+      mcq: 0,
+      findingOutput: 1,
+      trueOrFalse: 0,
+      easy: 0,
+      hard: 1,
+      happyActive: 0,
+      happyInactive: 0,
+      unhappyActive: 0,
+      unhappyInactive: 0,
+      mentalEffort: 0,
+      valid: 0,
+    },
+    surveyDone: false,
+  },
+
+  {
+    index: 10,
+    questionType: "trueFalse",
+    question:
+      "A Loop is a block of code that is executed repeatedly as long as a condition is satisfied.",
+    givenAns: null,
+    correctAnswer: "True",
+    options: [
+      {
+        value: "True",
+      },
+      {
+        value: "False",
+      },
+    ],
+    dictionary: {
+      function: 0,
+      loops: 1,
+      condition: 0,
+      theory: 0,
+      mcq: 0,
+      findingOutput: 0,
+      trueOrFalse: 1,
+      easy: 0,
+      hard: 0,
+      happyActive: 0,
+      happyInactive: 0,
+      unhappyActive: 0,
+      unhappyInactive: 0,
+      mentalEffort: 0,
+      valid: 0,
+    },
+    surveyDone: false,
+  },
+
+
+  {
+    index: 11,
+    questionType: "trueFalse",
+    question:
+      "A WHILE loop in Java executes the statements at least once even the condition is not satisfied.",
+    givenAns: null,
+    correctAnswer: "False",
+    options: [
+      {
+        value: "True",
+      },
+      {
+        value: "False",
+      },
+    ],
+    dictionary: {
+      function: 0,
+      loops: 1,
+      condition: 0,
+      theory: 0,
+      mcq: 0,
+      findingOutput: 0,
+      trueOrFalse: 1,
+      easy: 0,
+      hard: 1,
+      happyActive: 0,
+      happyInactive: 0,
+      unhappyActive: 0,
+      unhappyInactive: 0,
+      mentalEffort: 0,
+      valid: 0,
+    },
+    surveyDone: false,
+  },
 ];
 
 export default function experiment() {
   const [list, setList] = useState(data);
-  const [activeIndex, setActiveIndex] = useState(4);
+  const [activeIndex, setActiveIndex] = useState(11);
   const [showSurvey, setShowServey] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -335,16 +555,27 @@ export default function experiment() {
           >
             {item.options.map((option, index) => {
               return (
-                <div key={index} style={{ display: "flex", marginTop: 25 }}>
+                <div
+                  key={index}
+                  style={{
+                    display: "flex",
+                    marginTop: 25,
+                    alignItems: "center",
+                  }}
+                >
                   <FormControlLabel value={option.value} control={<Radio />} />
-                  <img
-                    src={option.img}
-                    style={{
-                      // height: option.size ? option.size.height : "100%",
-                      width: "100%",
-                      borderRadius: 8,
-                    }}
-                  />
+                  {option.img ? (
+                    <img
+                      src={option.img}
+                      style={{
+                        // height: option.size ? option.size.height : "100%",
+                        width: "100%",
+                        borderRadius: 8,
+                      }}
+                    />
+                  ) : (
+                    <Typography>{option.label}</Typography>
+                  )}
                 </div>
               );
             })}
@@ -353,7 +584,7 @@ export default function experiment() {
       );
     }
 
-    if(item.questionType === "trueFalse") {
+    if (item.questionType === "trueFalse") {
       return (
         <FormControl component="fieldset">
           <RadioGroup
@@ -371,7 +602,11 @@ export default function experiment() {
             {item.options.map((option, index) => {
               return (
                 <div key={index} style={{ display: "flex", marginTop: 0 }}>
-                  <FormControlLabel value={option.value} label={option.value} control={<Radio />} />
+                  <FormControlLabel
+                    value={option.value}
+                    label={option.value}
+                    control={<Radio />}
+                  />
                 </div>
               );
             })}
@@ -386,7 +621,7 @@ export default function experiment() {
           <Grid xs={12} item>
             <TextField
               style={{ width: "100%", marginTop: 20, marginBottom: 20 }}
-              placeholder="Write your output in one word here"
+              placeholder={"Write your output in one word here"}
               variant="outlined"
               onChange={(event) => {
                 const value = event.target.value;
@@ -401,7 +636,7 @@ export default function experiment() {
             />
           </Grid>
 
-          <img src={item.img} />
+          <img style={{ width:"100%", borderRadius: 16}} src={item.img} />
         </div>
       );
     }
@@ -418,7 +653,7 @@ export default function experiment() {
       </div>
 
       <Grid container justify="center">
-        <Grid container item xs={12}>
+        <Grid container item xs={10}>
           <Card
             className={cs.card}
             style={{
@@ -436,6 +671,21 @@ export default function experiment() {
                   <Typography>
                     <b>Question: </b> {list[activeIndex].question}
                   </Typography>
+                  {list[activeIndex].hint && (
+                    <Typography>
+                      {list[activeIndex].hint}
+                    </Typography>
+                  )}
+                  {list[activeIndex].questionImage && (
+                    <img
+                      style={{
+                        // height: option.size ? option.size.height : "100%",
+                        width: "100%",
+                        borderRadius: 8,
+                      }}
+                      src={list[activeIndex].questionImage}
+                    />
+                  )}
                   <div style={{ marginTop: 20 }}>
                     {renderQuestion(list[activeIndex])}
                   </div>
