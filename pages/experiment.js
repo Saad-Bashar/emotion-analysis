@@ -7,12 +7,7 @@ import {
   TextField,
   LinearProgress,
   FormControl,
-  InputLabel,
   FormControlLabel,
-  MenuItem,
-  Checkbox,
-  FormLabel,
-  FormGroup,
   Grid,
   CardActions,
   RadioGroup,
@@ -76,7 +71,7 @@ const data = [
       mentalEffort: 0,
       valid: 0,
     },
-    surveyDone: false,
+    label: "easy-function-mcq"
   },
 
   {
@@ -88,18 +83,23 @@ const data = [
       {
         img: "/func-hard-mcq-op1.png",
         value: "func-hard-mcq-op1",
+        size: {height: 300}
       },
       {
         img: "/func-hard-mcq-op2.png",
         value: "func-hard-mcq-op2",
+        size: {height: 300}
       },
       {
         img: "/func-hard-mcq-op3.png",
         value: "func-hard-mcq-op3",
+        size: {height: 300}
+        
       },
       {
         img: "/func-hard-mcq-op4.png",
         value: "func-hard-mcq-op4",
+        size: {height: 300}
       },
     ],
     givenAns: null,
@@ -121,7 +121,7 @@ const data = [
       mentalEffort: 0,
       valid: 0,
     },
-    surveyDone: false,
+    label: "hard-function-mcq"
   },
 
   {
@@ -148,7 +148,7 @@ const data = [
       mentalEffort: 0,
       valid: 0,
     },
-    surveyDone: false,
+    label: "easy-function-finding-output"
   },
 
   {
@@ -175,7 +175,7 @@ const data = [
       mentalEffort: 0,
       valid: 0,
     },
-    surveyDone: false,
+    label: "hard-function-finding-output"
   },
 
   {
@@ -209,7 +209,7 @@ const data = [
       mentalEffort: 0,
       valid: 0,
     },
-    surveyDone: false,
+    label: "easy-function-true-false"
   },
 
   {
@@ -244,7 +244,7 @@ const data = [
       mentalEffort: 0,
       valid: 0,
     },
-    surveyDone: false,
+    label: "hard-function-true-false"
   },
 
   {
@@ -290,7 +290,7 @@ const data = [
       mentalEffort: 0,
       valid: 0,
     },
-    surveyDone: false,
+    label: "easy-loops-mcq"
   },
 
   {
@@ -336,7 +336,7 @@ const data = [
       mentalEffort: 0,
       valid: 0,
     },
-    surveyDone: false,
+    label: "hard-loops-mcq"
   },
 
 
@@ -364,7 +364,7 @@ const data = [
       mentalEffort: 0,
       valid: 0,
     },
-    surveyDone: false,
+    label: "easy-loops-finding-output"
   },
 
   {
@@ -392,7 +392,7 @@ const data = [
       mentalEffort: 0,
       valid: 0,
     },
-    surveyDone: false,
+    label: "hard-loops-finding-output"
   },
 
   {
@@ -418,7 +418,7 @@ const data = [
       mcq: 0,
       findingOutput: 0,
       trueOrFalse: 1,
-      easy: 0,
+      easy: 1,
       hard: 0,
       happyActive: 0,
       happyInactive: 0,
@@ -427,7 +427,7 @@ const data = [
       mentalEffort: 0,
       valid: 0,
     },
-    surveyDone: false,
+    label: "easy-loops-true-false"
   },
 
 
@@ -463,13 +463,225 @@ const data = [
       mentalEffort: 0,
       valid: 0,
     },
-    surveyDone: false,
+    label: "hard-loops-true-false"
+  },
+
+
+  {
+    index: 12,
+    questionType: "mcq",
+    question: "An IF or ELSE IF statement accepts ________ as input before branching.",
+    givenAns: null,
+    correctAnswer: "A",
+    options: [
+      {
+        label: "boolean",
+        value: "A",
+      },
+      {
+        label: "int",
+        value: "B",
+      },
+      {
+        label: "float",
+        value: "C",
+      },
+      {
+        label: "char",
+        value: "D",
+      },
+    ],
+    dictionary: {
+      function: 0,
+      loops: 0,
+      condition: 1,
+      theory: 0,
+      mcq: 1,
+      findingOutput: 0,
+      trueOrFalse: 0,
+      easy: 1,
+      hard: 0,
+      happyActive: 0,
+      happyInactive: 0,
+      unhappyActive: 0,
+      unhappyInactive: 0,
+      mentalEffort: 0,
+      valid: 0,
+    },
+    label: "easy-condition-mcq"
+  },
+
+  {
+    index: 13,
+    questionType: "mcq",
+    question: "The condition of an IF statement evaluates to boolean only if the expression contains?",
+    givenAns: null,
+    correctAnswer: "D",
+    options: [
+      {
+        label: "logical operators",
+        value: "A",
+      },
+      {
+        label: "relational operators",
+        value: "B",
+      },
+      {
+        label: "boolean operands",
+        value: "C",
+      },
+      {
+        label: "All",
+        value: "D",
+      },
+    ],
+    dictionary: {
+      function: 0,
+      loops: 0,
+      condition: 1,
+      theory: 0,
+      mcq: 1,
+      findingOutput: 0,
+      trueOrFalse: 0,
+      easy: 0,
+      hard: 1,
+      happyActive: 0,
+      happyInactive: 0,
+      unhappyActive: 0,
+      unhappyInactive: 0,
+      mentalEffort: 0,
+      valid: 0,
+    },
+    label: "hard-condition-mcq"
+  },
+
+
+  {
+    index: 14,
+    questionType: "output",
+    question: "What will be the output of the following program?",
+    img: "/condition-easy-output.png",
+    givenAns: null,
+    correctAnswer: "Great!",
+    dictionary: {
+      function: 0,
+      loops: 0,
+      condition: 1,
+      theory: 0,
+      mcq: 0,
+      findingOutput: 1,
+      trueOrFalse: 0,
+      easy: 1,
+      hard: 0,
+      happyActive: 0,
+      happyInactive: 0,
+      unhappyActive: 0,
+      unhappyInactive: 0,
+      mentalEffort: 0,
+      valid: 0,
+    },
+    label: "easy-condition-finding-output"
+  },
+
+  {
+    index: 15,
+    questionType: "output",
+    question: "What will be the output of the following program?",
+    img: "/condition-hard-output.png",
+    givenAns: null,
+    correctAnswer: "If executed",
+    dictionary: {
+      function: 0,
+      loops: 0,
+      condition: 1,
+      theory: 0,
+      mcq: 0,
+      findingOutput: 1,
+      trueOrFalse: 0,
+      easy: 0,
+      hard: 1,
+      happyActive: 0,
+      happyInactive: 0,
+      unhappyActive: 0,
+      unhappyInactive: 0,
+      mentalEffort: 0,
+      valid: 0,
+    },
+    label: "hard-condition-finding-output"
+  },
+
+  {
+    index: 16,
+    questionType: "trueFalse",
+    question: "An IF statement code must be defined in between two braces.",
+    givenAns: null,
+    correctAnswer: "False",
+    options: [
+      {
+        value: "True",
+      },
+      {
+        value: "False",
+      },
+    ],
+    dictionary: {
+      function: 0,
+      loops: 0,
+      condition: 1,
+      theory: 0,
+      mcq: 0,
+      findingOutput: 0,
+      trueOrFalse: 1,
+      easy: 1,
+      hard: 0,
+      happyActive: 0,
+      happyInactive: 0,
+      unhappyActive: 0,
+      unhappyInactive: 0,
+      mentalEffort: 0,
+      valid: 0,
+    },
+    label: "easy-condition-true-false"
+  },
+
+  {
+    index: 17,
+    questionType: "trueFalse",
+    question: "An IF-Else statement is better than a switch statement when checking for ranges",
+    givenAns: null,
+    correctAnswer: "True",
+    options: [
+      {
+        value: "True",
+      },
+      {
+        value: "False",
+      },
+    ],
+    dictionary: {
+      function: 0,
+      loops: 0,
+      condition: 1,
+      theory: 0,
+      mcq: 0,
+      findingOutput: 0,
+      trueOrFalse: 1,
+      easy: 0,
+      hard: 1,
+      happyActive: 0,
+      happyInactive: 0,
+      unhappyActive: 0,
+      unhappyInactive: 0,
+      mentalEffort: 0,
+      valid: 0,
+    },
+    label: "hard-condition-true-false"
   },
 ];
 
 export default function experiment() {
   const [list, setList] = useState(data);
-  const [activeIndex, setActiveIndex] = useState(11);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [showSurvey, setShowServey] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -546,7 +758,7 @@ export default function experiment() {
             onChange={(event) => {
               let newList = [...list];
               newList[activeIndex].givenAns = event.target.value;
-              if (event.target.value === item.correctAnswer) {
+              if (event.target.value.toLowerCase().trim() === item.correctAnswer.toLowerCase().trim()) {
                 newList[activeIndex].dictionary.valid = 1;
               }
 
@@ -568,7 +780,7 @@ export default function experiment() {
                     <img
                       src={option.img}
                       style={{
-                        // height: option.size ? option.size.height : "100%",
+                        height: option.size ? option.size.height : "100%",
                         width: "100%",
                         borderRadius: 8,
                       }}
@@ -628,7 +840,7 @@ export default function experiment() {
                 let newList = [...list];
                 newList[activeIndex].givenAns = value;
 
-                if (value.toLowerCase() == item.correctAnswer) {
+                if (value.toLowerCase().trim() === item.correctAnswer.toLowerCase().trim()) {
                   newList[activeIndex].dictionary.valid = 1;
                   setList(newList);
                 }
@@ -643,14 +855,28 @@ export default function experiment() {
   };
 
   if (done) {
-    return <div>You are done!</div>;
+    return (
+      <Grid container justify="center">
+        <Grid item xs={12} align="center" justify="center">>
+          <img src={'/complete.png'} />
+        </Grid>
+        <Grid item xs={12} align="center" justify="center"> 
+        <Typography variant="h4" fontWeight="bold" >
+            Congratulations and Thank You!
+        </Typography>
+        </Grid>
+      </Grid>
+    )
   }
 
+  const activeItem = list[activeIndex];
   return (
     <div className={cs.container}>
       <div className={cs.main}>
         <h3 className={cs.title}>SECTION 3 - FINAL ROUND</h3>
       </div>
+
+      <LinearProgress variant="determinate" value={activeIndex + 1 / data.length} />
 
       <Grid container justify="center">
         <Grid container item xs={10}>
@@ -669,25 +895,28 @@ export default function experiment() {
               {!showSurvey ? (
                 <>
                   <Typography>
-                    <b>Question: </b> {list[activeIndex].question}
+                    <b>Question: </b> {activeItem.question}
                   </Typography>
-                  {list[activeIndex].hint && (
+                  <Typography variant="caption1">
+                    <b>Only for testing: </b> <span style={{color: "red"}}>{activeItem.label}</span>
+                  </Typography>
+                  {activeItem.hint && (
                     <Typography>
-                      {list[activeIndex].hint}
+                      {activeItem.hint}
                     </Typography>
                   )}
-                  {list[activeIndex].questionImage && (
+                  {activeItem.questionImage && (
                     <img
                       style={{
                         // height: option.size ? option.size.height : "100%",
                         width: "100%",
                         borderRadius: 8,
                       }}
-                      src={list[activeIndex].questionImage}
+                      src={activeItem.questionImage}
                     />
                   )}
                   <div style={{ marginTop: 20 }}>
-                    {renderQuestion(list[activeIndex])}
+                    {renderQuestion(activeItem)}
                   </div>
                 </>
               ) : (
