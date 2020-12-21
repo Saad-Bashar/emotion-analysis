@@ -144,8 +144,8 @@ export default function practice() {
     if (item.type === "survey") {
       return (
         <Grid item>
-          <SAM />
-          <NASA />
+          <SAM setValue={()=>{}} />
+          <NASA setValue={()=>{}} />
         </Grid>
       );
     }
