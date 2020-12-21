@@ -698,7 +698,6 @@ const data = [
 
 export default function experiment() {
   const [list, setList] = useState(() => data.sort(() => Math.random() - 0.5));
-  // const [list, setList] = useState(data);
   const [activeIndex, setActiveIndex] = useState(0);
   const [showSurvey, setShowServey] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
@@ -709,10 +708,31 @@ export default function experiment() {
 
   const nextSlide = () => {
     const activeItem = list[activeIndex];
+    console.log("activeItem", activeItem);
 
     if (!activeItem.givenAns) {
       return setShowError(true);
+    } else {
+      setShowServey(true);
     }
+
+    if(showSurvey) {
+      if (
+        activeItem.dictionary.happyActive == 0 &&
+        activeItem.dictionary.unhappyActive == 0 &&
+        activeItem.dictionary.unhappyInactive == 0 &&
+        activeItem.dictionary.happyInactive == 0 &&
+        activeItem.dictionary.neutral == 0 &&
+        !activeItem.dictionary.questionRating
+      ) {
+        setShowDialog(true);
+      } else {
+        setShowServey(false);
+        setActiveIndex(activeIndex + 1);
+      }
+    }
+
+    return
 
     if (
       activeItem.dictionary.happyActive == 0 &&
@@ -765,7 +785,6 @@ export default function experiment() {
   };
 
   const setSamValue = (valence, arousal) => {
-    console.log("valence arous ", valence, arousal);
     let newList = [...list];
     if (valence > 0 && arousal > 0) {
       newList[activeIndex].dictionary.happyActive = 1;
@@ -776,6 +795,8 @@ export default function experiment() {
     } else if (valence > 0 && arousal < 0) {
       newList[activeIndex].dictionary.happyInactive = 1;
     } else if (valence == 0 && arousal == 0) {
+      newList[activeIndex].dictionary.neutral = 1;
+    } else {
       newList[activeIndex].dictionary.neutral = 1;
     }
 
