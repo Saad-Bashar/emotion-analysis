@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import { TextField } from "formik-material-ui";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -24,6 +24,8 @@ import {
 import Grid from "@material-ui/core/Grid";
 import * as Yup from "yup";
 import Slide from "@material-ui/core/Slide";
+import Router from "next/router";
+import fire from "../config/firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,8 +70,8 @@ export default function personaldetails() {
           </code>
         </p>
       </div>
-      <Grid xs={12} justify="center" container>
-        <Grid xs={8}>
+      <Grid justify="center" container>
+        <Grid>
           <Card className={cs.card} elevation={5} style={{ borderRadius: 16 }}>
             <CardContent>
               <Typography
@@ -94,15 +96,16 @@ export default function personaldetails() {
                   motivationProblem: false,
                   emotion: "",
                   languagesCount: 1,
+                  matrix: ""
                 }}
                 validationSchema={validationSchema}
                 validateOnChange={false}
                 validateOnBlur={false}
                 onSubmit={(values, { setSubmitting }) => {
-                  setTimeout(() => {
-                    setSubmitting(false);
-                    alert(JSON.stringify(values, null, 2));
-                  }, 500);
+                  const uuid = localStorage.getItem("uuid");
+                  fire.firestore().collection("users").doc(uuid).set(values);
+                  localStorage.setItem("personalDetails", "done");
+                  return Router.push("./practice");
                 }}
               >
                 {({
@@ -500,6 +503,29 @@ export default function personaldetails() {
                           ) : null}
                         </div>
                       </Grid>
+                    </Grid>
+
+                    <Divider
+                      style={{
+                        marginTop: 30,
+                        marginBottom: 30,
+                        color: "#ddd",
+                      }}
+                    />
+
+                    <Grid container item xs={12} direction="column" className={classes.wrapper}>
+                      <Grid item style={{ marginTop: 10, marginBottom: 10 }}>
+                        <InputLabel>Please input your matric no (this will be used only to give you extra marks/credit in your course)</InputLabel>
+                      </Grid>
+                      <Grid item>
+                        <Field
+                          variant="outlined"
+                          component={TextField}
+                          name="matrix"
+                          label="Matric No"
+                        />
+                      </Grid>
+                      
                     </Grid>
 
                     <Grid style={{ marginTop: 40 }}>

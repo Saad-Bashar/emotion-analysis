@@ -9,10 +9,8 @@ import {
   FormControl,
   FormControlLabel,
   Grid,
-  CardActions,
   RadioGroup,
   Radio,
-  Paper,
   Snackbar,
 } from "@material-ui/core";
 import cs from "../styles/Home.module.css";
@@ -24,6 +22,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
+import QuestionRating from "../src/components/questionRating";
+import fire from "../config/firebase";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -33,7 +33,7 @@ const data = [
   {
     index: 0,
     questionType: "mcq",
-    question: "Which one is the correct function syntax?",
+    question: "Which one is the correct function syntax in java?",
     options: [
       {
         img: "/func-easy-mcq-op1.png",
@@ -70,8 +70,8 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "easy-function-mcq",
     },
-    label: "easy-function-mcq"
   },
 
   {
@@ -83,23 +83,22 @@ const data = [
       {
         img: "/func-hard-mcq-op1.png",
         value: "func-hard-mcq-op1",
-        size: {height: 300}
+        size: { height: 300 },
       },
       {
         img: "/func-hard-mcq-op2.png",
         value: "func-hard-mcq-op2",
-        size: {height: 300}
+        size: { height: 300 },
       },
       {
         img: "/func-hard-mcq-op3.png",
         value: "func-hard-mcq-op3",
-        size: {height: 300}
-        
+        size: { height: 300 },
       },
       {
         img: "/func-hard-mcq-op4.png",
         value: "func-hard-mcq-op4",
-        size: {height: 300}
+        size: { height: 300 },
       },
     ],
     givenAns: null,
@@ -120,14 +119,14 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "hard-function-mcq",
     },
-    label: "hard-function-mcq"
   },
 
   {
     index: 2,
     questionType: "output",
-    question: "What is the output of the method MAX?",
+    question: "What is the output of the method getValue?",
     img: "/func-easy-output.png",
     givenAns: null,
     correctAnswer: "10",
@@ -147,8 +146,8 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "easy-function-finding-output",
     },
-    label: "easy-function-finding-output"
   },
 
   {
@@ -174,8 +173,8 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "hard-function-finding-output",
     },
-    label: "hard-function-finding-output"
   },
 
   {
@@ -208,8 +207,8 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "easy-function-true-false",
     },
-    label: "easy-function-true-false"
   },
 
   {
@@ -243,8 +242,8 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "hard-function-true-false",
     },
-    label: "hard-function-true-false"
   },
 
   {
@@ -289,8 +288,8 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "easy-loops-mcq",
     },
-    label: "easy-loops-mcq"
   },
 
   {
@@ -335,10 +334,9 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "hard-loops-mcq",
     },
-    label: "hard-loops-mcq"
   },
-
 
   {
     index: 8,
@@ -363,15 +361,16 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "easy-loops-finding-output",
     },
-    label: "easy-loops-finding-output"
   },
 
   {
     index: 9,
     questionType: "output",
     question: "What will be the output of the following program?",
-    hint: "Your answer should be in this format: 2712297 where i = 27, j - 12 and k is 297", 
+    hint:
+      "Your answer should be in this format: 2712297 where i = 27, j = 12 and k = 297",
     img: "/loops-hard-output.png",
     givenAns: null,
     correctAnswer: "1616297",
@@ -391,8 +390,8 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "hard-loops-finding-output",
     },
-    label: "hard-loops-finding-output"
   },
 
   {
@@ -426,10 +425,9 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "easy-loops-true-false",
     },
-    label: "easy-loops-true-false"
   },
-
 
   {
     index: 11,
@@ -462,15 +460,15 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "hard-loops-true-false",
     },
-    label: "hard-loops-true-false"
   },
-
 
   {
     index: 12,
     questionType: "mcq",
-    question: "An IF or ELSE IF statement accepts ________ as input before branching.",
+    question:
+      "An IF or ELSE IF statement accepts ________ as input before branching.",
     givenAns: null,
     correctAnswer: "A",
     options: [
@@ -507,14 +505,15 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "easy-condition-mcq",
     },
-    label: "easy-condition-mcq"
   },
 
   {
     index: 13,
     questionType: "mcq",
-    question: "The condition of an IF statement evaluates to boolean only if the expression contains?",
+    question:
+      "The condition of an IF statement evaluates to boolean only if the expression contains?",
     givenAns: null,
     correctAnswer: "D",
     options: [
@@ -551,10 +550,9 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "hard-condition-mcq",
     },
-    label: "hard-condition-mcq"
   },
-
 
   {
     index: 14,
@@ -579,8 +577,8 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "easy-condition-finding-output",
     },
-    label: "easy-condition-finding-output"
   },
 
   {
@@ -606,8 +604,8 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "hard-condition-finding-output",
     },
-    label: "hard-condition-finding-output"
   },
 
   {
@@ -640,14 +638,15 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "easy-condition-true-false",
     },
-    label: "easy-condition-true-false"
   },
 
   {
     index: 17,
     questionType: "trueFalse",
-    question: "An IF-Else statement is better than a switch statement when checking for ranges",
+    question:
+      "An IF-Else statement is better than a switch statement when checking for ranges",
     givenAns: null,
     correctAnswer: "True",
     options: [
@@ -674,20 +673,18 @@ const data = [
       unhappyInactive: 0,
       mentalEffort: 0,
       valid: 0,
+      label: "hard-condition-true-false",
     },
-    label: "hard-condition-true-false"
   },
 ];
 
 export default function experiment() {
-  const [list, setList] = useState(data);
+  const [list, setList] = useState(data.sort(() => Math.random() - 0.5));
   const [activeIndex, setActiveIndex] = useState(0);
   const [showSurvey, setShowServey] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [showError, setShowError] = useState(false);
   const [done, setDone] = useState(false);
-
-  console.log("List -- ", list);
 
   const nextSlide = () => {
     const activeItem = list[activeIndex];
@@ -722,7 +719,21 @@ export default function experiment() {
       setShowDialog(true);
       setShowServey(true);
     } else {
-      setDone(true);
+      const uuid = localStorage.getItem("uuid");
+
+      let values = list.reduce(function (result, item, index, array) {
+        result[index] = item.dictionary;
+        return result;
+      }, {});
+
+      fire
+        .firestore()
+        .collection("users")
+        .doc(uuid)
+        .update({ dictionary: values })
+        .then((result) => {
+          setDone(true);
+        });
     }
   };
 
@@ -748,6 +759,13 @@ export default function experiment() {
     setList(newList);
   };
 
+  const setQuestionRatingValue = (value) => {
+    let newList = [...list];
+    newList[activeIndex].dictionary.questionRating = parseInt(value);
+
+    setList(newList);
+  };
+
   const renderQuestion = (item) => {
     if (item.questionType === "mcq") {
       return (
@@ -758,7 +776,10 @@ export default function experiment() {
             onChange={(event) => {
               let newList = [...list];
               newList[activeIndex].givenAns = event.target.value;
-              if (event.target.value.toLowerCase().trim() === item.correctAnswer.toLowerCase().trim()) {
+              if (
+                event.target.value.toLowerCase().trim() ===
+                item.correctAnswer.toLowerCase().trim()
+              ) {
                 newList[activeIndex].dictionary.valid = 1;
               }
 
@@ -840,7 +861,10 @@ export default function experiment() {
                 let newList = [...list];
                 newList[activeIndex].givenAns = value;
 
-                if (value.toLowerCase().trim() === item.correctAnswer.toLowerCase().trim()) {
+                if (
+                  value.toLowerCase().trim() ===
+                  item.correctAnswer.toLowerCase().trim()
+                ) {
                   newList[activeIndex].dictionary.valid = 1;
                   setList(newList);
                 }
@@ -848,7 +872,7 @@ export default function experiment() {
             />
           </Grid>
 
-          <img style={{ width:"100%", borderRadius: 16}} src={item.img} />
+          <img style={{ width: "100%", borderRadius: 16 }} src={item.img} />
         </div>
       );
     }
@@ -857,16 +881,16 @@ export default function experiment() {
   if (done) {
     return (
       <Grid container justify="center">
-        <Grid item xs={12} align="center" justify="center">>
-          <img src={'/complete.png'} />
+        <Grid item xs={12} align="center" justify="center">
+          <img src={"/complete.png"} />
         </Grid>
-        <Grid item xs={12} align="center" justify="center"> 
-        <Typography variant="h4" fontWeight="bold" >
+        <Grid item xs={12} align="center" justify="center">
+          <Typography variant="h4" fontWeight="bold">
             Congratulations and Thank You!
-        </Typography>
+          </Typography>
         </Grid>
       </Grid>
-    )
+    );
   }
 
   const activeItem = list[activeIndex];
@@ -876,7 +900,10 @@ export default function experiment() {
         <h3 className={cs.title}>SECTION 3 - FINAL ROUND</h3>
       </div>
 
-      <LinearProgress variant="determinate" value={activeIndex + 1 / data.length} />
+      <LinearProgress
+        variant="determinate"
+        value={Math.round((activeIndex / (data.length - 1)) * 100)}
+      />
 
       <Grid container justify="center">
         <Grid container item xs={10}>
@@ -897,13 +924,8 @@ export default function experiment() {
                   <Typography>
                     <b>Question: </b> {activeItem.question}
                   </Typography>
-                  <Typography variant="caption1">
-                    <b>Only for testing: </b> <span style={{color: "red"}}>{activeItem.label}</span>
-                  </Typography>
                   {activeItem.hint && (
-                    <Typography>
-                      {activeItem.hint}
-                    </Typography>
+                    <Typography>{activeItem.hint}</Typography>
                   )}
                   {activeItem.questionImage && (
                     <img
@@ -923,6 +945,7 @@ export default function experiment() {
                 <>
                   <SAM setValue={setSamValue} />
                   <NASA setValue={setNASAValue} />
+                  <QuestionRating setValue={setQuestionRatingValue} />
                 </>
               )}
 

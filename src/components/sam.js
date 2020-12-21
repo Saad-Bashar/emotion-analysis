@@ -12,9 +12,6 @@ import {
 export default function SAM({ title, setValue }) {
   const [valence, setValence] = useState(null);
   const [arousal, setArousal] = useState(null);
-
-  console.log("valence ", valence);
-
   useEffect(() => {
     if (valence && arousal) {
       setValue(valence, arousal);
@@ -23,8 +20,11 @@ export default function SAM({ title, setValue }) {
 
   return (
     <div>
-      <Typography variant="body2">
-        How was your experience solving the problem?
+      <Typography variant="body2" style={{ fontWeight: "bold", }}>
+        How did you feel?
+      </Typography>
+      <Typography variant="subtitle1">
+        1 (Very Unpleasant) - 9 (Very Pleasant)
       </Typography>
       <div>
         <img style={{ width: 620 }} src="/SAM.png" />
@@ -87,6 +87,15 @@ export default function SAM({ title, setValue }) {
       </div>
 
       <div style={{ marginTop: 30 }}>
+        <div style={{ marginBottom: 20 }}>
+          <Typography variant="body2" style={{ fontWeight: "bold", }}>
+            How strong did you feel?
+          </Typography>
+          <Typography variant="subtitle1">
+            1 (Very Calm) - 9 (Very Excited)
+          </Typography>
+        </div>
+        
         <img style={{ width: 620 }} src="/SAM2.png" />
         <FormGroup style={{ alignItems: "flex-start" }}>
           <FormControl>

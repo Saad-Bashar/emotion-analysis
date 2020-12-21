@@ -18,9 +18,11 @@ export default function NASA({ setValue }) {
 
   return (
     <div className={classes.root}>
-      <Typography variant="body2">
-        How much mental pressure did you feel while watching the video? (0 - No
-        pressure, 100 - Extreme pressure)
+      <Typography variant="body2" style={{ fontWeight: "bold" }}>
+        How much mental pressure did you feel?
+      </Typography>
+      <Typography variant="subtitle1">
+        (0 - No pressure, 100 - Extreme pressure)
       </Typography>
       <Slider
         defaultValue={0}

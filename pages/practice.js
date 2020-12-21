@@ -5,9 +5,7 @@ import {
   Typography,
   CardContent,
   TextField,
-  LinearProgress,
   FormControl,
-  InputLabel,
   FormControlLabel,
   MenuItem,
   Checkbox,
@@ -22,6 +20,8 @@ import {
 import cs from "../styles/Home.module.css";
 import SAM from "../src/components/sam";
 import NASA from "../src/components/nasa";
+import Router from "next/router";
+
 
 const data = [
   {
@@ -35,7 +35,7 @@ const data = [
   {
     index: 1,
     instruction:
-      "Please choose the options that best matches after watching the video",
+      "Please choose the options that best matches",
     type: "survey",
     for: "happyvideo",
   },
@@ -50,7 +50,7 @@ const data = [
   {
     index: 3,
     instruction:
-      "Please choose the options that best matches after watching the video",
+      "Please choose the options that best matches",
     type: "survey",
     for: "afraidvideo",
   },
@@ -94,7 +94,7 @@ const data = [
   {
     index: 6,
     instruction:
-      "Please choose the options that best matches after watching the video",
+      "Please choose the options that best matches",
     type: "survey",
     for: "pq1",
   },
@@ -111,7 +111,7 @@ const data = [
   {
     index: 8,
     instruction:
-      "Please choose the options that best matches after watching the video",
+      "Please choose the options that best matches",
     type: "survey",
     for: "pq2",
   },
@@ -202,7 +202,8 @@ export default function practice() {
   };
 
   const finish = () => {
-    alert("finish");
+    localStorage.setItem("practice", "done");
+    return Router.push("./experiment-intro");
   };
 
   return (
@@ -216,10 +217,10 @@ export default function practice() {
         </p>
       </div>
 
-      <Grid container xs={12} justify="center">
-        <Grid container item xs={6}>
+      <Grid container justify="center">
+        <Grid container item xs={12}>
           <Card
-            className={[cs.card]}
+            className={cs.card}
             style={{ borderRadius: 16, flex: 1 }}
             elevation={5}
           >

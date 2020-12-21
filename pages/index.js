@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import {
@@ -16,6 +16,8 @@ import Router from "next/router";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { makeStyles } from "@material-ui/core/styles";
+import { v4 as uuidv4 } from "uuid";
+import fire from "../config/firebase";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -37,7 +39,31 @@ export default function Home() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
-  console.log("finalSteeps ", finalStep);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const uuid = localStorage.getItem("uuid");
+      if (!uuid) {
+        localStorage.setItem("uuid", uuidv4());
+      } else {
+        redirectPage();
+      }
+    }
+  }, []);
+
+  const redirectPage = () => {
+    const intro = localStorage.getItem("intro");
+    const personalDetails = localStorage.getItem("personalDetails");
+    const practice = localStorage.getItem("practice");
+
+    if (practice === "done") {
+      return Router.push("./experiment-intro");
+    } else if (personalDetails === "done") {
+      return Router.push("./practice");
+    } else if (intro === "done") {
+      return Router.push("./personaldetails");
+    }
+  };
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -51,13 +77,14 @@ export default function Home() {
   };
 
   const completeSteps = () => {
+    localStorage.setItem("intro", "done");
     setFinalStep(true);
   };
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Emotion Analysis</title>
         <link rel="icon" href="/favicon.ico" />
         <link
           rel="stylesheet"
@@ -66,9 +93,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org"> the fun experiment!</a>
-        </h1>
+        <h1 className={styles.title}>Welcome to the fun experiment!</h1>
 
         <p className={styles.description}>
           Get started by reading out{" "}
