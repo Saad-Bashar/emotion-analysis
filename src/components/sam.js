@@ -12,9 +12,52 @@ import {
 export default function SAM({ title, setValue }) {
   const [valence, setValence] = useState(null);
   const [arousal, setArousal] = useState(null);
-  useEffect(() => {
+ 
+  useEffect(() => {   
     if (valence && arousal) {
-      setValue(valence, arousal);
+      console.log("valnce, arous", valence, arousal);
+      let a = 0, v = 0;
+      switch (valence) {
+        case "1":
+        case "2":
+        case "3":
+        case "4":
+          v = -1;
+          break;
+        case "6":
+        case "7":
+        case "8":
+        case "9":
+          v = 1;
+          break;
+        case "5":
+          v = 0;
+          break;
+        default:
+          return;
+      }
+
+      switch (arousal) {
+        case "1":
+        case "2":
+        case "3":
+        case "4":
+          a = -1;
+          break;
+        case "6":
+        case "7":
+        case "8":
+        case "9":
+          a = 1;
+          break;
+        case "5":
+          a = 0;
+          break;
+        default:
+          return;
+      }
+     
+      setValue(v, a);
     }
   }, [valence, arousal]);
 
@@ -56,7 +99,7 @@ export default function SAM({ title, setValue }) {
                   />
                   <FormControlLabel
                     style={{ marginLeft: 2 }}
-                    value={5}
+                    value={0}
                     control={<Radio />}
                   />
                   <FormControlLabel

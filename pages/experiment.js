@@ -68,6 +68,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "easy-function-mcq",
@@ -117,6 +118,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "hard-function-mcq",
@@ -144,6 +146,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "easy-function-finding-output",
@@ -171,6 +174,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "hard-function-finding-output",
@@ -205,6 +209,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "easy-function-true-false",
@@ -240,6 +245,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "hard-function-true-false",
@@ -286,6 +292,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "easy-loops-mcq",
@@ -332,6 +339,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "hard-loops-mcq",
@@ -359,6 +367,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "easy-loops-finding-output",
@@ -388,6 +397,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "hard-loops-finding-output",
@@ -423,6 +433,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "easy-loops-true-false",
@@ -458,6 +469,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "hard-loops-true-false",
@@ -503,6 +515,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "easy-condition-mcq",
@@ -548,6 +561,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "hard-condition-mcq",
@@ -575,6 +589,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "easy-condition-finding-output",
@@ -602,6 +617,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "hard-condition-finding-output",
@@ -636,6 +652,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "easy-condition-true-false",
@@ -671,6 +688,7 @@ const data = [
       happyInactive: 0,
       unhappyActive: 0,
       unhappyInactive: 0,
+      neutral: 0,
       mentalEffort: 0,
       valid: 0,
       label: "hard-condition-true-false",
@@ -679,23 +697,30 @@ const data = [
 ];
 
 export default function experiment() {
-  const [list, setList] = useState(data.sort(() => Math.random() - 0.5));
+  const [list, setList] = useState(() => data.sort(() => Math.random() - 0.5));
+  // const [list, setList] = useState(data);
   const [activeIndex, setActiveIndex] = useState(0);
   const [showSurvey, setShowServey] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [showError, setShowError] = useState(false);
   const [done, setDone] = useState(false);
 
+  console.log("LIST --", list);
+
   const nextSlide = () => {
     const activeItem = list[activeIndex];
 
     if (!activeItem.givenAns) {
-      setShowError(true);
-    } else if (
+      return setShowError(true);
+    }
+
+    if (
       activeItem.dictionary.happyActive == 0 &&
       activeItem.dictionary.unhappyActive == 0 &&
       activeItem.dictionary.unhappyInactive == 0 &&
-      activeItem.dictionary.happyInactive == 0
+      activeItem.dictionary.happyInactive == 0 &&
+      activeItem.dictionary.neutral == 0 &&
+      !activeItem.dictionary.questionRating
     ) {
       setShowDialog(true);
       setShowServey(true);
@@ -714,7 +739,9 @@ export default function experiment() {
       activeItem.dictionary.happyActive == 0 &&
       activeItem.dictionary.unhappyActive == 0 &&
       activeItem.dictionary.unhappyInactive == 0 &&
-      activeItem.dictionary.happyInactive == 0
+      activeItem.dictionary.happyInactive == 0 &&
+      activeItem.dictionary.neutral == 0 &&
+      !activeItem.dictionary.questionRating
     ) {
       setShowDialog(true);
       setShowServey(true);
@@ -738,6 +765,7 @@ export default function experiment() {
   };
 
   const setSamValue = (valence, arousal) => {
+    console.log("valence arous ", valence, arousal);
     let newList = [...list];
     if (valence > 0 && arousal > 0) {
       newList[activeIndex].dictionary.happyActive = 1;
@@ -747,6 +775,8 @@ export default function experiment() {
       newList[activeIndex].dictionary.unhappyInactive = 1;
     } else if (valence > 0 && arousal < 0) {
       newList[activeIndex].dictionary.happyInactive = 1;
+    } else if (valence == 0 && arousal == 0) {
+      newList[activeIndex].dictionary.neutral = 1;
     }
 
     setList(newList);
@@ -761,7 +791,7 @@ export default function experiment() {
 
   const setQuestionRatingValue = (value) => {
     let newList = [...list];
-    newList[activeIndex].dictionary.questionRating = parseInt(value);
+    newList[activeIndex].dictionary.questionRating = value === "easy" ? 0 : 1;
 
     setList(newList);
   };
