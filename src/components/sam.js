@@ -15,7 +15,7 @@ export default function SAM({ title, setValue }) {
  
   useEffect(() => {   
     if (valence && arousal) {
-      console.log("valnce, arous", valence, arousal);
+
       let a = 0, v = 0;
       switch (valence) {
         case "1":

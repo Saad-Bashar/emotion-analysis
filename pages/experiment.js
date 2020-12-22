@@ -706,7 +706,7 @@ export default function experiment() {
   const [email, setEmail] = useState(null);
   const [success, setSuccess] = useState(false);
 
-  console.log("success ", success);
+  console.log("LIST ", list)
 
   const nextSlide = () => {
     const activeItem = list[activeIndex];
@@ -714,6 +714,7 @@ export default function experiment() {
     if (!activeItem.givenAns) {
       return setShowError(true);
     } else {
+      activeItem.dictionary.givenAns = activeItem.givenAns;
       setShowServey(true);
     }
 
@@ -729,6 +730,7 @@ export default function experiment() {
         setShowDialog(true);
       } else {
         setShowServey(false);
+        
         setActiveIndex(activeIndex + 1);
       }
     }
@@ -747,6 +749,7 @@ export default function experiment() {
       activeItem.dictionary.neutral == 0 &&
       !activeItem.dictionary.questionRating
     ) {
+      activeItem.dictionary.givenAns = activeItem.givenAns;
       setShowDialog(true);
       setShowServey(true);
     } else {
@@ -772,16 +775,30 @@ export default function experiment() {
     let newList = [...list];
     if (valence > 0 && arousal > 0) {
       newList[activeIndex].dictionary.happyActive = 1;
+      newList[activeIndex].dictionary.unhappyActive = 0;
+      newList[activeIndex].dictionary.unhappyInactive = 0;
+      newList[activeIndex].dictionary.happyInactive = 0;
     } else if (valence < 0 && arousal > 0) {
       newList[activeIndex].dictionary.unhappyActive = 1;
+      newList[activeIndex].dictionary.happyActive = 0;
+      newList[activeIndex].dictionary.unhappyInactive = 0;
+      newList[activeIndex].dictionary.happyInactive = 0;
     } else if (valence < 0 && arousal < 0) {
       newList[activeIndex].dictionary.unhappyInactive = 1;
+      newList[activeIndex].dictionary.unhappyActive = 0;
+      newList[activeIndex].dictionary.happyActive = 0;
+      newList[activeIndex].dictionary.happyInactive = 0;
     } else if (valence > 0 && arousal < 0) {
       newList[activeIndex].dictionary.happyInactive = 1;
-    } else if (valence == 0 && arousal == 0) {
+      newList[activeIndex].dictionary.happyActive = 0;
+      newList[activeIndex].dictionary.unhappyActive = 0;
+      newList[activeIndex].dictionary.unhappyInactive = 0;
+    }  else {
       newList[activeIndex].dictionary.neutral = 1;
-    } else {
-      newList[activeIndex].dictionary.neutral = 1;
+      newList[activeIndex].dictionary.happyInactive = 0;
+      newList[activeIndex].dictionary.happyActive = 0;
+      newList[activeIndex].dictionary.unhappyActive = 0;
+      newList[activeIndex].dictionary.unhappyInactive = 0;
     }
 
     setList(newList);
@@ -939,7 +956,6 @@ export default function experiment() {
             <Button
               onClick={() => {
                 const uuid = localStorage.getItem("uuid");
-                console.log({ uuid: uuid });
                 fire
                   .firestore()
                   .collection("users")
