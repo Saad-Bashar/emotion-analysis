@@ -65,9 +65,8 @@ export default function experiment() {
                   <Typography variant="body2">
                     This is a one go experiment.{" "}
                     <span style={{ color: "red", fontWeight: "bold" }}>
-                      Do not leave in the middle of the test
+                      Do not leave in the middle of the test.
                     </span>
-                    , in such case you need to give it again.
                   </Typography>
                 </li>
                 <li style={{ paddingTop: 10 }}>

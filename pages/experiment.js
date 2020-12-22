@@ -703,12 +703,13 @@ export default function experiment() {
   const [showDialog, setShowDialog] = useState(false);
   const [showError, setShowError] = useState(false);
   const [done, setDone] = useState(false);
+  const [email, setEmail] = useState(null);
+  const [success, setSuccess] = useState(false);
 
-  console.log("LIST --", list);
+  console.log("success ", success);
 
   const nextSlide = () => {
     const activeItem = list[activeIndex];
-    console.log("activeItem", activeItem);
 
     if (!activeItem.givenAns) {
       return setShowError(true);
@@ -716,7 +717,7 @@ export default function experiment() {
       setShowServey(true);
     }
 
-    if(showSurvey) {
+    if (showSurvey) {
       if (
         activeItem.dictionary.happyActive == 0 &&
         activeItem.dictionary.unhappyActive == 0 &&
@@ -730,23 +731,6 @@ export default function experiment() {
         setShowServey(false);
         setActiveIndex(activeIndex + 1);
       }
-    }
-
-    return
-
-    if (
-      activeItem.dictionary.happyActive == 0 &&
-      activeItem.dictionary.unhappyActive == 0 &&
-      activeItem.dictionary.unhappyInactive == 0 &&
-      activeItem.dictionary.happyInactive == 0 &&
-      activeItem.dictionary.neutral == 0 &&
-      !activeItem.dictionary.questionRating
-    ) {
-      setShowDialog(true);
-      setShowServey(true);
-    } else {
-      setShowServey(false);
-      setActiveIndex(activeIndex + 1);
     }
   };
 
@@ -933,12 +917,56 @@ export default function experiment() {
     return (
       <Grid container justify="center">
         <Grid item xs={12} align="center" justify="center">
-          <img src={"/complete.png"} />
+          <img src={"/complete.png"} style={{ height: 500 }} />
         </Grid>
         <Grid item xs={12} align="center" justify="center">
-          <Typography variant="h4" fontWeight="bold">
-            Congratulations and Thank You!
+          <Typography variant="h5" fontWeight="bold">
+            We are done! Thank you so much for your patience and participation!
           </Typography>
+          <Typography style={{ marginTop: 20, marginBottom: 20 }}>
+            If you would like to have your results emailed to you, please enter
+            your email address.
+          </Typography>
+          <TextField
+            style={{ width: "20%" }}
+            placeholder={"Email address"}
+            variant="outlined"
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }}
+          />
+          <div style={{ margin: 20 }}>
+            <Button
+              onClick={() => {
+                const uuid = localStorage.getItem("uuid");
+                console.log({ uuid: uuid });
+                fire
+                  .firestore()
+                  .collection("users")
+                  .doc(uuid)
+                  .update({ email: email })
+                  .then((result) => {
+                    setSuccess(true);
+                  });
+              }}
+              variant="contained"
+              color="primary"
+              size="large"
+            >
+              SUBMIT
+            </Button>
+          </div>
+
+          <Snackbar
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+            open={success}
+            autoHideDuration={1500}
+            onClose={() => setSuccess(false)}
+            message="Submitted successfully! You may now close the browser"
+          />
         </Grid>
       </Grid>
     );
